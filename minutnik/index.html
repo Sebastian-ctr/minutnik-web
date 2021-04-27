@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">"
+    <title>Minutnik</title>
+</head>
+<body>
+  <div id="bg">
+    
+    <div class="clock-display">
+        <span class="minute" id="minute">
+          0
+        </span>
+        
+        <span class="dwukropek">
+          :
+        </span>
+
+        <span class="secund" id="secund">
+          0
+        </span>
+
+    </div>
+
+    <div class="button">
+      
+          <button type="button" class="btn btn-success btn-lg" id="start"
+          onclick="timer()"> 
+              start
+          </button>
+        
+
+        <button type="button" class="btn btn-warning btn-lg" id="stop"
+        onclick="stop()">
+            stop
+        </button>
+      
+      
+        <button type="button" class="btn btn-primary btn-lg" id="zero"
+        onclick="zero()">
+            wyzeruj
+        </button>
+      
+    </div>
+
+    <div class="time">
+        <input type="number" value="" id="input">
+        <input type="submit" value="ok" id="ok" onclick="submit()">
+    </div>
+
+    <script>
+        var myTimer;
+        var minuteValue;
+        var secundValue;
+        function timer(){
+          myTimer = setInterval(add, 1000);
+        }
+
+        function submit(){
+          var value = document.getElementById("input").value;
+          minuteValue = document.getElementById("minute").innerHTML=value;
+        }
+        
+      
+        function add(){
+          secundValue = document.getElementById("secund").innerHTML;
+          if (secundValue >= 1){
+          var newSecundValue = parseInt(secundValue) - 1;
+          var display = newSecundValue.toString();
+          document.getElementById("secund").innerHTML=display;
+          }
+          else{
+            document.getElementById("secund").innerHTML=59
+            minuteValue = document.getElementById("minute").innerHTML;
+            if (minuteValue != 0){
+            var newMinuteValue = minuteValue - 1;
+            document.getElementById("minute").innerHTML=newMinuteValue;
+            }
+            else{
+              clearInterval(myTimer);
+              document.getElementById("secund").innerHTML=0;
+            }
+          }
+
+          
+        }
+        
+        function stop(){
+          clearInterval(myTimer);
+          console.log("stop");
+        }
+
+        function zero(){
+          clearInterval(myTimer);
+          document.getElementById("minute").innerHTML=0;
+          document.getElementById("secund").innerHTML=0;
+          console.log("zero hit");
+        }
+      
+        
+
+        
+    </script>
+  </div>
+</body>
+</html>
